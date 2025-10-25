@@ -1,0 +1,2253 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <!-- ========== معلومات الصفحة الأساسية ========== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="مولد برومبتات اللابات التعليمية للغات البرمجة - النسخة المحسّنة والأكثر مرونة">
+    <title>مولد برومبتات اللابات التعليمية المتقدم</title>
+
+    <!-- ========== Bootstrap 5 CDN ========== -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- ========== Font Awesome CDN للأيقونات ========== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- ========== Google Fonts للخطوط العربية ========== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- ========== Animate.css للرسوم المتحركة ========== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- ========== أنماط CSS احترافية محسنة ========== -->
+    <style>
+        /* ===== متغيرات الألوان والأساليب المحسنة ===== */
+        :root {
+            /* Primary Colors */
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary-color: #8b5cf6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --info-color: #06b6d4;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #00d2ff 0%, #3a47d5 100%);
+            --light-bg: #f8fafc;
+            --dark-bg: #1e293b;
+            --border-color: #e2e8f0;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        /* ===== Dark Mode Variables ===== */
+        [data-theme="dark"] {
+            --light-bg: #0f172a;
+            --dark-bg: #f8fafc;
+            --border-color: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --primary-color: #818cf8;
+            --secondary-color: #a78bfa;
+        }
+        
+        [data-theme="dark"] .main-container {
+            background: #1e293b;
+        }
+        
+        [data-theme="dark"] .form-control,
+        [data-theme="dark"] .form-select {
+            background: #0f172a;
+            color: #f1f5f9;
+            border-color: #334155;
+        }
+        
+        [data-theme="dark"] .template-card {
+            background: #1e293b;
+            color: #f1f5f9;
+        }
+        
+        /* ===== Smooth Transitions ===== */
+        * {
+            transition: var(--transition-fast);
+        }
+
+        /* ===== الجسم والخلفية المحسنة ===== */
+        body {
+            background: var(--gradient-1);
+            position: relative;
+            min-height: 100vh;
+            font-family: 'Noto Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px 0;
+            line-height: 1.6;
+            transition: var(--transition-normal);
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.03" d="M0,32L48,80C96,128,192,224,288,224C384,224,480,128,576,90.7C672,53,768,75,864,96C960,117,1056,139,1152,133.3C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat;
+            background-size: cover;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        [data-theme="dark"] body {
+            background: linear-gradient(135deg, #1a1c2e 0%, #2d3561 100%);
+        }
+
+        /* ===== الحاوية الرئيسية ===== */
+        .main-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        /* ===== رأس الصفحة ===== */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== محتوى الصفحة الرئيسي ===== */
+        .content {
+            padding: 50px;
+        }
+
+        /* ===== مجموعات النموذج ===== */
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            display: block;
+            font-size: 1rem;
+        }
+
+        .form-group .form-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* ===== حقول الإدخال ===== */
+        .form-control, .form-select {
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            outline: none;
+            transform: translateY(-1px);
+        }
+
+        .form-control::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        /* ===== الأقسام المنظمة ===== */
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 40px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--secondary-color);
+        }
+
+        /* ===== الصفوف المنظمة ===== */
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        /* ===== الأزرار ===== */
+        .btn {
+            padding: 14px 35px;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #d97706;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+        }
+
+        .btn-info {
+            background: var(--info-color);
+            color: white;
+        }
+
+        .btn-info:hover {
+            background: #0891b2;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.5);
+        }
+
+        .btn-group-custom {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+            justify-content: center;
+        }
+
+        .btn-group-custom .btn {
+            flex: 1;
+            min-width: 160px;
+        }
+
+        /* ===== منطقة المعاينة والنتيجة ===== */
+        .output-section {
+            background: var(--light-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 35px;
+            display: none;
+        }
+
+        .output-section.active {
+            display: block;
+            animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .output-header h3 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .output-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== مربع النص للنتيجة ===== */
+        #promptOutput {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-primary);
+            min-height: 400px;
+            max-height: 700px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            resize: vertical;
+        }
+
+        #promptOutput:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        /* ===== شريط التقدم ===== */
+        .progress-indicator {
+            display: none;
+            align-items: center;
+            gap: 15px;
+            margin: 20px 0;
+            color: var(--primary-color);
+            background: rgba(99, 102, 241, 0.1);
+            padding: 15px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .progress-indicator.active {
+            display: flex;
+        }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===== رسائل التنبيه ===== */
+        .alert-custom {
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 25px;
+            display: none;
+            animation: slideIn 0.3s ease;
+            border: 1px solid;
+            font-weight: 500;
+        }
+
+        .alert-custom.active {
+            display: block;
+        }
+
+        .alert-error {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-color: #fca5a5;
+            color: #991b1b;
+        }
+
+        .alert-success {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            border-color: #86efac;
+            color: #166534;
+        }
+
+        .alert-info {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-color: #93c5fd;
+            color: #1e40af;
+        }
+
+        /* ===== حقل اللغة الأخرى ===== */
+        #otherLanguageField, #customFrameworkField {
+            display: none;
+            margin-top: 15px;
+        }
+
+        /* ===== الفوتر ===== */
+        .footer {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #334155 100%);
+            padding: 25px;
+            text-align: center;
+            color: #cbd5e1;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            margin-top: 40px;
+        }
+
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== التجاوبية ===== */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .content {
+                padding: 25px 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .btn-group-custom {
+                flex-direction: column;
+            }
+
+            .btn-group-custom .btn {
+                width: 100%;
+                min-width: unset;
+            }
+
+            #promptOutput {
+                font-size: 0.9rem;
+                min-height: 300px;
+            }
+
+            .output-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .output-stats {
+                font-size: 0.8rem;
+                gap: 15px;
+            }
+        }
+
+        /* ===== تأثيرات إضافية ===== */
+        .form-group {
+            position: relative;
+        }
+
+        .form-group::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s ease;
+        }
+
+        .form-group:focus-within::after {
+            width: 100%;
+        }
+
+        /* ===== تحسينات الوصول ===== */
+        .form-control:disabled, .form-select:disabled {
+            background-color: #f8fafc;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <!-- ========== زر تبديل الوضع الليلي/النهاري ========== -->
+    <div class="theme-toggle">
+        <button id="themeToggle" class="btn btn-light rounded-circle shadow-lg" style="width: 50px; height: 50px; position: fixed; top: 20px; left: 20px; z-index: 1000;">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+    
+    <!-- ========== الحاوية الرئيسية ========== -->
+    <div class="container-fluid">
+        <div class="main-container">
+            <!-- ========== رأس الصفحة ========== -->
+            <div class="header">
+                <h1 class="animate__animated animate__fadeInDown">
+                    <i class="fas fa-flask-vial animate__animated animate__pulse animate__infinite"></i> مولد برومبتات اللابات التعليمية المتقدم
+                </h1>
+                <p class="animate__animated animate__fadeInUp">
+                    أنشئ برومبتات احترافية لجميع لغات البرمجة بميزات متقدمة
+                </p>
+                <div class="version-badge animate__animated animate__fadeInUp animate__delay-1s">
+                    <i class="fas fa-star"></i> الإصدار الاحترافي Pro 3.0
+                </div>
+            </div>
+
+            <!-- ========== محتوى الصفحة الرئيسي ========== -->
+            <div class="content">
+                <!-- ========== رسالة التنبيه ========== -->
+                <div id="alertBox" class="alert-custom"></div>
+
+                <!-- ========== شريط التقدم ========== -->
+                <div id="progressIndicator" class="progress-indicator">
+                    <div class="spinner"></div>
+                    <div>
+                        <strong>جاري إنشاء البرومبت...</strong>
+                        <br>
+                        <small>يرجى الانتظار حتى الانتهاء من المعالجة</small>
+                    </div>
+                    </div>
+
+                </div>
+
+                <!-- ========== قسم القوالب الجاهزة ========== -->
+                <div class="templates-section mb-4 animate__animated animate__fadeIn" id="templatesSection">
+                    <div class="section-title">
+                        <i class="fas fa-layer-group"></i> قوالب جاهزة للمشاريع
+                    </div>
+                    <div class="templates-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div class="template-card" onclick="selectTemplate('web-app')" style="background: var(--light-bg); border: 2px solid var(--border-color); border-radius: 12px; padding: 20px; cursor: pointer; transition: var(--transition-normal);">
+                            <div style="font-size: 2rem; color: var(--primary-color); margin-bottom: 10px;">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h5 style="color: var(--text-primary); margin-bottom: 5px;">تطبيق ويب</h5>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">مشروع ويب متكامل</p>
+                        </div>
+                        <div class="template-card" onclick="selectTemplate('mobile-app')" style="background: var(--light-bg); border: 2px solid var(--border-color); border-radius: 12px; padding: 20px; cursor: pointer; transition: var(--transition-normal);">
+                            <div style="font-size: 2rem; color: var(--secondary-color); margin-bottom: 10px;">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h5 style="color: var(--text-primary); margin-bottom: 5px;">تطبيق موبايل</h5>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">تطبيق iOS/Android</p>
+                        </div>
+                        <div class="template-card" onclick="selectTemplate('api')" style="background: var(--light-bg); border: 2px solid var(--border-color); border-radius: 12px; padding: 20px; cursor: pointer; transition: var(--transition-normal);">
+                            <div style="font-size: 2rem; color: var(--success-color); margin-bottom: 10px;">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <h5 style="color: var(--text-primary); margin-bottom: 5px;">RESTful API</h5>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">خدمة ويب API</p>
+                        </div>
+                        <div class="template-card" onclick="selectTemplate('ai-ml')" style="background: var(--light-bg); border: 2px solid var(--border-color); border-radius: 12px; padding: 20px; cursor: pointer; transition: var(--transition-normal);">
+                            <div style="font-size: 2rem; color: var(--warning-color); margin-bottom: 10px;">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h5 style="color: var(--text-primary); margin-bottom: 5px;">ذكاء اصطناعي</h5>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">مشروع AI/ML</p>
+                        </div>
+                        <div class="template-card" onclick="selectTemplate('game')" style="background: var(--light-bg); border: 2px solid var(--border-color); border-radius: 12px; padding: 20px; cursor: pointer; transition: var(--transition-normal);">
+                            <div style="font-size: 2rem; color: var(--danger-color); margin-bottom: 10px;">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h5 style="color: var(--text-primary); margin-bottom: 5px;">لعبة</h5>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">تطوير ألعاب</p>
+                        </div>
+                        <div class="template-card" onclick="selectTemplate('data-analysis')" style="background: var(--light-bg); border: 2px solid var(--border-color); border-radius: 12px; padding: 20px; cursor: pointer; transition: var(--transition-normal);">
+                            <div style="font-size: 2rem; color: var(--info-color); margin-bottom: 10px;">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h5 style="color: var(--text-primary); margin-bottom: 5px;">تحليل بيانات</h5>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">تحليل وتصور بيانات</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== نموذج الإدخال ========== -->
+                <form id="labForm" novalidate>
+                    <!-- ===== القسم الأول: معلومات اللغة والمستوى ===== -->
+                    <div class="section-title">
+                        <i class="fas fa-code"></i> معلومات اللغة والمستوى
+                    </div>
+
+                    <div class="form-row">
+                        <!-- اختيار اللغة البرمجية -->
+                        <div class="form-group">
+                            <label for="programmingLanguage">
+                                اللغة البرمجية <span style="color: var(--danger-color);">*</span>
+                            </label>
+                            <select id="programmingLanguage" class="form-select" required aria-label="اختر اللغة البرمجية">
+                                <option value="">-- اختر اللغة --</option>
+                                <!-- اللغات الأساسية الأكثر استخداماً -->
+                                <option value="Python">🐍 Python</option>
+                                <option value="JavaScript">🟨 JavaScript</option>
+                                <option value="TypeScript">🔷 TypeScript</option>
+                                <option value="Java">☕ Java</option>
+                                <option value="C#">🔹 C#</option>
+                                <option value="PHP">🐘 PHP</option>
+                                <option value="C++">⚡ C++</option>
+                                <option value="C">⚙️ C</option>
+                                <option value="Go">🐹 Go</option>
+                                <option value="Rust">🦀 Rust</option>
+                                <option value="Swift">🦉 Swift</option>
+                                <option value="Kotlin">🎯 Kotlin</option>
+                                <option value="Dart">🎯 Dart</option>
+                                <option value="Ruby">💎 Ruby</option>
+                                <option value="R">📊 R</option>
+                                <option value="SQL">🗃️ SQL</option>
+                                <option value="Scala">⚡ Scala</option>
+                                <option value="Julia">🔬 Julia</option>
+                                <option value="Elixir">💜 Elixir</option>
+                                <option value="Lua">🌙 Lua</option>
+                                <option value="Perl">🐪 Perl</option>
+                                <option value="Haskell">λ Haskell</option>
+                                <option value="MATLAB">📐 MATLAB</option>
+                                <option value="Solidity">⟠ Solidity</option>
+                                <option value="Bash">🖥️ Bash/Shell</option>
+                                <option value="PowerShell">🔷 PowerShell</option>
+                                <option value="Other">🔧 أخرى</option>
+                            </select>
+                            <div class="form-text">
+                                اختر اللغة البرمجية الأساسية للاب من بين الخيارات الشائعة
+                            </div>
+                        </div>
+
+                        <!-- حقل اللغة الأخرى (يظهر عند اختيار "أخرى") -->
+                        <div class="form-group" id="otherLanguageField">
+                            <label for="otherLanguage">اسم اللغة المخصصة</label>
+                            <input type="text" id="otherLanguage" class="form-control"
+                                   placeholder="مثال: Scala, Haskell, Julia" aria-label="اسم اللغة المخصصة">
+                            <div class="form-text">
+                                اكتب اسم اللغة البرمجية التي تريدها إذا لم تكن في القائمة
+                            </div>
+                        </div>
+
+                        <!-- اختيار المستوى -->
+                        <div class="form-group">
+                            <label for="level">
+                                المستوى التعليمي <span style="color: var(--danger-color);">*</span>
+                            </label>
+                            <select id="level" class="form-select" required aria-label="اختر المستوى التعليمي">
+                                <option value="">-- اختر المستوى --</option>
+                                <option value="مبتدئ">🌱 مبتدئ (للمبتدئين تماماً)</option>
+                                <option value="متوسط">📈 متوسط (لديه معرفة أساسية)</option>
+                                <option value="متقدم">🚀 متقدم (للمطورين المحترفين)</option>
+                                <option value="خبير">👑 خبير (للمطورين المتخصصين)</option>
+                            </select>
+                            <div class="form-text">
+                                حدد مستوى الطلاب المستهدفين بناءً على خبرتهم البرمجية
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== القسم الثاني: معلومات المشروع ===== -->
+                    <div class="section-title">
+                        <i class="fas fa-project-diagram"></i> معلومات المشروع الأساسية
+                    </div>
+
+                    <div class="form-group">
+                        <label for="topic">
+                            عنوان/موضوع اللاب <span style="color: var(--danger-color);">*</span>
+                        </label>
+                        <input type="text" id="topic" class="form-control"
+                               placeholder="مثال: تطوير تطبيق إدارة المهام باستخدام React و Node.js"
+                               required aria-label="عنوان اللاب">
+                        <div class="form-text">
+                            اكتب عنوان واضح ومفصل للمشروع التعليمي (يفضل أن يكون أكثر من 10 كلمات)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="goal">
+                            الهدف التعليمي الرئيسي <span style="color: var(--danger-color);">*</span>
+                        </label>
+                        <textarea id="goal" class="form-control" rows="4"
+                                  placeholder="مثال: تعلم كيفية بناء تطبيق ويب كامل من الصفر باستخدام React للواجهة الأمامية و Node.js للخادم، مع التركيز على إدارة الحالة، التعامل مع APIs، وأفضل الممارسات في التطوير الحديث"
+                                  required aria-label="الهدف التعليمي"></textarea>
+                        <div class="form-text">
+                            اشرح بالتفصيل ما سيتعلمه الطالب بنهاية اللاب (المهارات والمفاهيم المكتسبة)
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <!-- المدة المتوقعة -->
+                        <div class="form-group">
+                            <label for="duration">المدة المتوقعة لإكمال اللاب</label>
+                            <input type="text" id="duration" class="form-control"
+                                   placeholder="مثال: 4-6 ساعات أو 3 أيام" aria-label="المدة المتوقعة">
+                            <div class="form-text">
+                                حدد الوقت التقريبي لإكمال المشروع (ساعات أو أيام)
+                            </div>
+                        </div>
+
+                        <!-- نوع المشروع -->
+                        <div class="form-group">
+                            <label for="projectType">نوع المشروع</label>
+                            <select id="projectType" class="form-select" aria-label="اختر نوع المشروع">
+                                <option value="تطبيق ويب">🌐 تطبيق ويب</option>
+                                <option value="تطبيق محمول">📱 تطبيق محمول</option>
+                                <option value="API وخدمات">🔌 API وخدمات</option>
+                                <option value="تطبيق سطح المكتب">🖥️ تطبيق سطح المكتب</option>
+                                <option value="أداة مساعدة">🛠️ أداة مساعدة</option>
+                                <option value="لعبة">🎮 لعبة</option>
+                                <option value="تحليل البيانات">📊 تحليل البيانات</option>
+                                <option value="ذكاء اصطناعي">🤖 ذكاء اصطناعي</option>
+                                <option value="أخرى">🔧 أخرى</option>
+                            </select>
+                            <div class="form-text">
+                                حدد نوع التطبيق أو المشروع الذي سيتم بناؤه
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== القسم الثالث: التقنيات والأدوات ===== -->
+                    <div class="section-title">
+                        <i class="fas fa-cogs"></i> المتطلبات التقنية والأدوات
+                    </div>
+
+                    <div class="form-row">
+                        <!-- الإطار/Framework -->
+                        <div class="form-group">
+                            <label for="framework">الإطار أو المنصة الأساسية</label>
+                            <select id="framework" class="form-select" aria-label="اختر الإطار">
+                                <option value="لا يوجد">لا يوجد إطار محدد</option>
+                                <!-- Frontend Frameworks -->
+                                <option value="React">⚛️ React</option>
+                                <option value="Vue.js">💚 Vue.js</option>
+                                <option value="Angular">🅰️ Angular</option>
+                                <option value="Svelte">🧡 Svelte</option>
+                                <option value="Next.js">▲ Next.js</option>
+                                <option value="Nuxt.js">💜 Nuxt.js</option>
+                                <!-- Backend Frameworks -->
+                                <option value="Express.js">🚀 Express.js</option>
+                                <option value="Django">🎸 Django</option>
+                                <option value="Flask">🍶 Flask</option>
+                                <option value="FastAPI">⚡ FastAPI</option>
+                                <option value="Spring Boot">🌱 Spring Boot</option>
+                                <option value="ASP.NET Core">🔵 ASP.NET Core</option>
+                                <option value="Laravel">🎭 Laravel</option>
+                                <option value="Symfony">🎵 Symfony</option>
+                                <option value="Ruby on Rails">💎 Ruby on Rails</option>
+                                <option value="NestJS">🦅 NestJS</option>
+                                <option value="Gin">🍹 Gin (Go)</option>
+                                <option value="Echo">🔊 Echo (Go)</option>
+                                <option value="Phoenix">🔥 Phoenix (Elixir)</option>
+                                <!-- Mobile Frameworks -->
+                                <option value="React Native">📱 React Native</option>
+                                <option value="Flutter">🎯 Flutter</option>
+                                <option value="Ionic">⚡ Ionic</option>
+                                <!-- Other -->
+                                <option value="SwiftUI">🍎 SwiftUI</option>
+                                <option value="Xamarin">📱 Xamarin</option>
+                                <!-- CSS Frameworks -->
+                                <option value="Bootstrap">📦 Bootstrap</option>
+                                <option value="Tailwind CSS">🎨 Tailwind CSS</option>
+                                <option value="Material UI">🎨 Material UI</option>
+                                <option value="Chakra UI">⚡ Chakra UI</option>
+                                <option value="Ant Design">🐜 Ant Design</option>
+                                <!-- Game Engines -->
+                                <option value="Unity">🎮 Unity</option>
+                                <option value="Unreal Engine">🎮 Unreal Engine</option>
+                                <option value="Godot">🎮 Godot</option>
+                                <option value="Other">🔧 مخصص</option>
+                            </select>
+                            <div class="form-text">
+                                الإطار أو المنصة التقنية الأساسية للمشروع
+                            </div>
+                        </div>
+
+                        <!-- حقل الإطار المخصص -->
+                        <div class="form-group" id="customFrameworkField">
+                            <label for="customFramework">اسم الإطار المخصص</label>
+                            <input type="text" id="customFramework" class="form-control"
+                                   placeholder="مثال: Gin, Fiber, Rocket" aria-label="اسم الإطار المخصص">
+                            <div class="form-text">
+                                اكتب اسم الإطار إذا لم يكن في القائمة
+                            </div>
+                        </div>
+
+                        <!-- قاعدة البيانات -->
+                        <div class="form-group">
+                            <label for="database">قاعدة البيانات</label>
+                            <select id="database" class="form-select" aria-label="اختر قاعدة البيانات">
+                                <option value="لا يوجد">لا يحتاج قاعدة بيانات</option>
+                                <option value="SQLite">📱 SQLite (محلية)</option>
+                                <option value="PostgreSQL">🐘 PostgreSQL</option>
+                                <option value="MySQL">🟢 MySQL</option>
+                                <option value="MongoDB">🍃 MongoDB</option>
+                                <option value="Redis">🔴 Redis</option>
+                                <option value="Firebase">🔥 Firebase</option>
+                                <option value="Supabase">⚡ Supabase</option>
+                                <option value="Other">🔧 أخرى</option>
+                            </select>
+                            <div class="form-text">
+                                نوع قاعدة البيانات المطلوبة للمشروع
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <!-- أدوات التطوير -->
+                        <div class="form-group">
+                            <label for="tools">أدوات التطوير والمحررات</label>
+                            <input type="text" id="tools" class="form-control"
+                                   placeholder="مثال: VS Code, IntelliJ IDEA, Docker, Postman"
+                                   aria-label="أدوات التطوير">
+                            <div class="form-text">
+                                الأدوات والمحررات المطلوبة لتطوير المشروع
+                            </div>
+                        </div>
+
+                        <!-- المكتبات والحزم -->
+                        <div class="form-group">
+                            <label for="libraries">المكتبات والحزم الإضافية</label>
+                            <input type="text" id="libraries" class="form-control"
+                                   placeholder="مثال: Axios, Lodash, NumPy, Pandas, TensorFlow"
+                                   aria-label="المكتبات والحزم">
+                            <div class="form-text">
+                                المكتبات الخارجية المطلوبة للمشروع
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== قسم جديد: مصادر البيانات والتكامل (API) ===== -->
+                    <div class="section-title">
+                        <i class="fas fa-plug"></i> مصادر البيانات والتكامل (API)
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">مصدر البيانات:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="dataSource" id="dataSourceApi" value="api" checked>
+                            <label class="form-check-label" for="dataSourceApi">
+                                <i class="fas fa-cloud"></i> API خارجي
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="dataSource" id="dataSourceLocal" value="local">
+                            <label class="form-check-label" for="dataSourceLocal">
+                                <i class="fas fa-database"></i> بيانات محلية
+                            </label>
+                        </div>
+                        <div class="form-text">اختر ما إذا كان اللاب سيعتمد على API خارجي أو بيانات محلية.</div>
+                    </div>
+
+                    <!-- ===== أزرار التعبئة السريعة ===== -->
+                    <div class="form-group mb-3">
+                        <label class="form-label">🛠️ أزرار التعبئة السريعة:</label>
+                        <div class="d-flex gap-2 flex-wrap">
+                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="prefillWithApi()">
+                                <i class="fas fa-cloud"></i> مع API
+                            </button>
+                            <button type="button" class="btn btn-outline-success btn-sm" onclick="prefillWithoutApi()">
+                                <i class="fas fa-database"></i> بدون API
+                            </button>
+                        </div>
+                        <div class="form-text text-muted">استخدم هذه الأزرار لتعبئة الحقول بسرعة حسب اللغة المختارة.</div>
+                    </div>
+
+                    <div id="apiFieldsContainer">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="apiSource">مصدر الـ API</label>
+                            <input type="text" id="apiSource" class="form-control" placeholder="مثال: https://fakestoreapi.com" aria-label="رابط مصدر الـ API">
+                            <div class="form-text">ضع رابط الـ API أو الخدمة المستخدمة كمصدر للبيانات</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apiAuth">نوع المصادقة (إن وجدت)</label>
+                            <input type="text" id="apiAuth" class="form-control" placeholder="مثال: لا يوجد / API Key / JWT / OAuth2" aria-label="نوع المصادقة للـ API">
+                            <div class="form-text">حدد طريقة المصادقة إن كانت مطلوبة للوصول إلى الـ API</div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="apiEndpoints">نقاط النهاية (Endpoints) الرئيسية</label>
+                            <textarea id="apiEndpoints" class="form-control" rows="3" placeholder="مثال:\nGET /products\nGET /products/{id}\nPOST /auth/login" aria-label="قائمة نقاط النهاية"></textarea>
+                            <div class="form-text">أدرج نقاط النهاية الأساسية المطلوبة داخل اللاب</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apiSample">مثال على بنية JSON</label>
+                            <textarea id="apiSample" class="form-control" rows="3" placeholder='مثال:\n{ "id": 1, "title": "Product", "price": 9.99 }' aria-label="عينة JSON"></textarea>
+                            <div class="form-text">ضع مثال JSON مبسط للبيانات المستهلكة</div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="apiRateLimit">حدود المعدل (Rate Limit)</label>
+                            <input type="text" id="apiRateLimit" class="form-control" placeholder="مثال: 60 طلب/دقيقة" aria-label="حدود المعدل">
+                            <div class="form-text">إن وجدت قيود على عدد الطلبات في الدقيقة/الساعة</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apiPagination">التقسيم إلى صفحات (Pagination)</label>
+                            <input type="text" id="apiPagination" class="form-control" placeholder="مثال: page, limit / cursor" aria-label="معلومة التصفح بالصفحات">
+                            <div class="form-text">وضح إن كان الـ API يوفر pagination وكيفية استخدامها</div>
+                        </div>
+                    </div>
+
+                    </div>
+
+                    <div id="localDataContainer" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="localDataStrategy">مصادر البيانات المحلية (بدون API)</label>
+                                <select id="localDataStrategy" class="form-select" aria-label="اختر استراتيجية البيانات المحلية">
+                                    <option value="">-- اختر الاستراتيجية --</option>
+                                    <option value="بيانات ثابتة في الكود">بيانات ثابتة في الكود</option>
+                                    <option value="ملف JSON محلي">ملف JSON محلي</option>
+                                    <option value="قاعدة بيانات محلية/SQLite">قاعدة بيانات محلية/SQLite</option>
+                                    <option value="تخزين محلي (LocalStorage/Hive)">تخزين محلي (LocalStorage/Hive)</option>
+                                </select>
+                                <div class="form-text text-muted">استخدم هذه الأزرار لتعبئة الحقول بسرعة للسيناريوهات الشائعة في Flutter.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="localJsonPath">مسار الملف المحلي (إن وجد)</label>
+                                <input type="text" id="localJsonPath" class="form-control" placeholder="مثال: assets/data/products.json" aria-label="مسار JSON المحلي">
+                                <div class="form-text">اتركه فارغاً إن كنت تستخدم بيانات ثابتة</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="localDataDetails">تفاصيل/ملاحظات حول البيانات المحلية</label>
+                            <textarea id="localDataDetails" class="form-control" rows="3" placeholder="مثال: مخطط البيانات، أسلوب توليد بيانات تجريبية، طريقة القراءة/التخزين..."></textarea>
+                            <div class="form-text">هذه المعلومات تُدمج في البرومبت لشرح مصدر البيانات</div>
+                        </div>
+                    </div>
+
+                    <!-- ===== القسم الرابع: الإعدادات والتخصيص ===== -->
+                    <div class="section-title">
+                        <i class="fas fa-sliders-h"></i> إعدادات المخرجات والتخصيص
+                    </div>
+
+                    <div class="form-row">
+                        <!-- نمط المخرجات -->
+                        <div class="form-group">
+                            <label for="outputStyle">نمط تفصيل المخرجات</label>
+                            <select id="outputStyle" class="form-select" aria-label="اختر نمط المخرجات">
+                                <option value="شامل">📚 شامل (مفصل وكامل - للمبتدئين)</option>
+                                <option value="مختصر">⚡ مختصر (موجز وسريع - للمتقدمين)</option>
+                                <option value="تفصيلي">🔍 تفصيلي (مع أمثلة إضافية - للخبراء)</option>
+                                <option value="متوازن">⚖️ متوازن (مفصل مع التركيز على الأهم)</option>
+                            </select>
+                            <div class="form-text">
+                                اختر مستوى التفصيل المطلوب في البرومبت واللاب
+                            </div>
+                        </div>
+
+                        <!-- مستوى التحدي -->
+                        <div class="form-group">
+                            <label for="challengeLevel">مستوى التحدي والصعوبة</label>
+                            <select id="challengeLevel" class="form-select" aria-label="اختر مستوى التحدي">
+                                <option value="سهل">🟢 سهل (تمارين أساسية)</option>
+                                <option value="متوسط">🟡 متوسط (تحديات معقولة)</option>
+                                <option value="صعب">🔴 صعب (تحديات متقدمة)</option>
+                                <option value="متنوع">🌈 متنوع (مختلط)</option>
+                            </select>
+                            <div class="form-text">
+                                تحديد صعوبة التمارين والتحديات في اللاب
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== القسم الخامس: المتطلبات الإضافية ===== -->
+                    <div class="section-title">
+                        <i class="fas fa-star"></i> متطلبات وملاحظات إضافية
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prerequisites">المتطلبات المسبقة للطلاب</label>
+                        <textarea id="prerequisites" class="form-control" rows="3"
+                                  placeholder="مثال: معرفة أساسية بـ HTML و CSS، فهم مفهوم المتغيرات والدوال في البرمجة"
+                                  aria-label="المتطلبات المسبقة"></textarea>
+                        <div class="form-text">
+                            ما يجب أن يعرفه الطالب قبل البدء في اللاب
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">ملاحظات ومتطلبات خاصة إضافية</label>
+                        <textarea id="notes" class="form-control" rows="4"
+                                  placeholder="أي تفاصيل إضافية، أو متطلبات خاصة، أو نصائح للـ AI..."
+                                  aria-label="ملاحظات إضافية"></textarea>
+                        <div class="form-text">
+                            أي تفاصيل إضافية تريد تضمينها في البرومبت (اختياري)
+                        </div>
+                    </div>
+
+                    <!-- ===== أزرار الإجراءات ===== -->
+                    <div class="btn-group-custom">
+                        <button type="button" id="generateBtn" class="btn btn-primary" onclick="generatePrompt()">
+                            <i class="fas fa-magic"></i> إنشاء البرومبت المتقدم
+                        </button>
+                        <button type="button" id="previewBtn" class="btn btn-secondary" onclick="generatePreview()" style="display: none;">
+                            <i class="fas fa-eye"></i> معاينة سريعة
+                        </button>
+                        <button type="button" id="copyBtn" class="btn btn-success" onclick="copyToClipboard()" style="display: none;">
+                            <i class="fas fa-copy"></i> نسخ للحافظة
+                        </button>
+                        <button type="button" id="downloadBtn" class="btn btn-info" onclick="downloadPrompt()" style="display: none;">
+                            <i class="fas fa-download"></i> تنزيل ملف نصي
+                        </button>
+                        <button type="button" id="downloadHtmlBtn" class="btn btn-warning" onclick="downloadHTML()" style="display: none;">
+                            <i class="fas fa-file-code"></i> تنزيل كـ HTML
+                        </button>
+                        <button type="button" id="resetBtn" class="btn btn-outline-secondary" onclick="resetForm()">
+                            <i class="fas fa-redo"></i> إعادة تعيين النموذج
+                        </button>
+                    </div>
+                </form>
+
+                <!-- ========== منطقة المخرجات ========== -->
+                <div id="outputSection" class="output-section">
+                    <div class="output-header">
+                        <h3>
+                            <i class="fas fa-file-alt"></i> البرومبت المُنتج المتقدم
+                        </h3>
+                        <div class="output-stats" id="outputInfo">
+                            <span><i class="fas fa-clock"></i> تم الإنشاء الآن</span>
+                        </div>
+                    </div>
+                    <textarea id="promptOutput" readonly placeholder="البرومبت سيظهر هنا... يمكنك تعديله قبل النسخ"></textarea>
+                </div>
+            </div>
+
+            <!-- ========== الفوتر ========== -->
+            <div class="footer">
+                <p>
+                    <i class="fas fa-info-circle"></i>
+                    مولد برومبتات اللابات التعليمية المتقدم | النسخة 2.0 | جميع الحقوق محفوظة
+                    <br>
+                    <small>تم تطوير هذه الأداة لتسهيل إنشاء المحتوى التعليمي البرمجي الاحترافي</small>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== Bootstrap JS ========== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- ========== JavaScript المخصص ========== -->
+    <script>
+        // ========== متغيرات عامة ==========
+        let currentPrompt = '';
+
+        // ========== دوال مساعدة ==========
+        
+        // تبديل الوضع الليلي/النهاري
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            
+            // تطبيق الثيم المحفوظ
+            body.setAttribute('data-theme', savedTheme);
+            updateThemeToggle(savedTheme);
+            
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = body.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeToggle(newTheme);
+            });
+        });
+        
+        function updateThemeToggle(theme) {
+            const icon = document.querySelector('#themeToggle i');
+            if (theme === 'dark') {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                document.getElementById('themeToggle').classList.remove('btn-light');
+                document.getElementById('themeToggle').classList.add('btn-dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                document.getElementById('themeToggle').classList.remove('btn-dark');
+                document.getElementById('themeToggle').classList.add('btn-light');
+            }
+        }
+        
+        // دالة اختيار القوالب الجاهزة
+        function selectTemplate(templateType) {
+            // إزالة التحديد من جميع البطاقات
+            document.querySelectorAll('.template-card').forEach(card => {
+                card.style.border = '2px solid var(--border-color)';
+                card.style.background = 'var(--light-bg)';
+            });
+            
+            // تحديد البطاقة المختارة
+            event.currentTarget.style.border = '2px solid var(--primary-color)';
+            event.currentTarget.style.background = 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)';
+            
+            // تعبئة الحقول حسب القالب
+            switch(templateType) {
+                case 'web-app':
+                    document.getElementById('programmingLanguage').value = 'JavaScript';
+                    document.getElementById('framework').value = 'React';
+                    document.getElementById('projectType').value = 'تطبيق ويب';
+                    document.getElementById('database').value = 'MongoDB';
+                    document.getElementById('topic').value = 'تطوير تطبيق ويب تفاعلي لإدارة المهام';
+                    document.getElementById('goal').value = 'تعلم بناء تطبيقات ويب حديثة باستخدام React وNode.js';
+                    break;
+                case 'mobile-app':
+                    document.getElementById('programmingLanguage').value = 'Dart';
+                    document.getElementById('framework').value = 'Flutter';
+                    document.getElementById('projectType').value = 'تطبيق محمول';
+                    document.getElementById('database').value = 'Firebase';
+                    document.getElementById('topic').value = 'تطوير تطبيق محمول للتجارة الإلكترونية';
+                    document.getElementById('goal').value = 'بناء تطبيق محمول cross-platform باستخدام Flutter';
+                    break;
+                case 'api':
+                    document.getElementById('programmingLanguage').value = 'Python';
+                    document.getElementById('framework').value = 'FastAPI';
+                    document.getElementById('projectType').value = 'API وخدمات';
+                    document.getElementById('database').value = 'PostgreSQL';
+                    document.getElementById('topic').value = 'بناء RESTful API احترافي';
+                    document.getElementById('goal').value = 'تعلم تصميم وبناء APIs قابلة للتوسع';
+                    break;
+                case 'ai-ml':
+                    document.getElementById('programmingLanguage').value = 'Python';
+                    document.getElementById('framework').value = 'None';
+                    document.getElementById('projectType').value = 'ذكاء اصطناعي';
+                    document.getElementById('database').value = 'لا يوجد';
+                    document.getElementById('libraries').value = 'TensorFlow, NumPy, Pandas, Scikit-learn';
+                    document.getElementById('topic').value = 'بناء نموذج تعلم آلي للتنبؤ';
+                    document.getElementById('goal').value = 'تعلم أساسيات الذكاء الاصطناعي وتعلم الآلة';
+                    break;
+                case 'game':
+                    document.getElementById('programmingLanguage').value = 'C#';
+                    document.getElementById('framework').value = 'Other';
+                    document.getElementById('customFramework').value = 'Unity';
+                    document.getElementById('projectType').value = 'لعبة';
+                    document.getElementById('database').value = 'لا يوجد';
+                    document.getElementById('topic').value = 'تطوير لعبة ثنائية الأبعاد';
+                    document.getElementById('goal').value = 'تعلم أساسيات تطوير الألعاب باستخدام Unity';
+                    document.getElementById('customFrameworkField').style.display = 'block';
+                    break;
+                case 'data-analysis':
+                    document.getElementById('programmingLanguage').value = 'Python';
+                    document.getElementById('framework').value = 'None';
+                    document.getElementById('projectType').value = 'تحليل البيانات';
+                    document.getElementById('database').value = 'PostgreSQL';
+                    document.getElementById('libraries').value = 'Pandas, NumPy, Matplotlib, Seaborn';
+                    document.getElementById('topic').value = 'تحليل وتصور بيانات المبيعات';
+                    document.getElementById('goal').value = 'تعلم تحليل البيانات واستخراج الرؤى القيّمة';
+                    break;
+            }
+            
+            // إظهار رسالة نجاح
+            showAlert(`✅ تم تحميل قالب ${templateType} بنجاح!`, 'success');
+        }
+
+        /**
+         * دالة لإظهار/إخفاء العناصر بنعومة
+         * @param {HTMLElement} element - العنصر المراد إظهاره أو إخفاؤه
+         * @param {boolean} show - true للإظهار، false للإخفاء
+         */
+        function toggleElement(element, show) {
+            if (show) {
+                element.style.display = 'block';
+                element.classList.add('active');
+            } else {
+                element.classList.remove('active');
+                setTimeout(() => {
+                    element.style.display = 'none';
+                }, 300);
+            }
+        }
+
+        // ========== التعامل مع ظهور حقول إضافية ==========
+
+        /**
+         * معالج تغيير اللغة البرمجية
+         * يظهر حقل اللغة المخصصة عند اختيار "أخرى"
+         */
+        document.getElementById('programmingLanguage').addEventListener('change', function() {
+            const otherLanguageField = document.getElementById('otherLanguageField');
+            const isOther = this.value === 'Other';
+
+            if (isOther) {
+                otherLanguageField.style.display = 'block';
+                document.getElementById('otherLanguage').focus();
+                document.getElementById('otherLanguage').required = true;
+            } else {
+                otherLanguageField.style.display = 'none';
+                document.getElementById('otherLanguage').required = false;
+            }
+        });
+
+        /**
+         * معالج تغيير الإطار
+         * يظهر حقل الإطار المخصص عند اختيار "مخصص"
+         */
+        document.getElementById('framework').addEventListener('change', function() {
+            const customFrameworkField = document.getElementById('customFrameworkField');
+            const isCustom = this.value === 'Other';
+
+            if (isCustom) {
+                customFrameworkField.style.display = 'block';
+                document.getElementById('customFramework').focus();
+            } else {
+                customFrameworkField.style.display = 'none';
+            }
+        });
+
+        // تبديل ظهور حقول API مقابل البيانات المحلية
+        document.getElementById('dataSourceApi').addEventListener('change', updateApiVisibility);
+        document.getElementById('dataSourceLocal').addEventListener('change', updateApiVisibility);
+
+        // ========== دوال عرض الرسائل ==========
+
+        /**
+         * دالة عرض رسائل التنبيه المخصصة
+         * @param {string} message - نص الرسالة
+         * @param {string} type - نوع الرسالة (error, success, info)
+         */
+        function showAlert(message, type = 'error') {
+            const alertBox = document.getElementById('alertBox');
+            alertBox.textContent = message;
+            alertBox.className = `alert-custom active alert-${type}`;
+
+            // إخفاء التنبيه تلقائياً بعد 5 ثوانٍ
+            setTimeout(() => {
+                alertBox.classList.remove('active');
+            }, 5000);
+        }
+
+        // ========== دوال التحقق من صحة البيانات ==========
+
+        /**
+         * التحقق من صحة النموذج
+         * @returns {boolean} true إذا كان النموذج صحيحاً
+         */
+        function validateForm() {
+            const requiredFields = [
+                { id: 'programmingLanguage', name: 'اللغة البرمجية' },
+                { id: 'topic', name: 'عنوان اللاب' },
+                { id: 'goal', name: 'الهدف التعليمي' },
+                { id: 'level', name: 'المستوى التعليمي' }
+            ];
+
+            // التحقق من الحقول المطلوبة الأساسية
+            for (const field of requiredFields) {
+                const element = document.getElementById(field.id);
+                const value = element.value.trim();
+
+                if (!value) {
+                    showAlert(`❌ الرجاء إدخال ${field.name}`, 'error');
+                    element.focus();
+                    return false;
+                }
+            }
+
+            // التحقق من اللغة المخصصة إذا كانت مطلوبة
+            const language = document.getElementById('programmingLanguage').value;
+            if (language === 'Other') {
+                const otherLanguage = document.getElementById('otherLanguage').value.trim();
+                if (!otherLanguage) {
+                    showAlert('❌ الرجاء إدخال اسم اللغة المخصصة', 'error');
+                    document.getElementById('otherLanguage').focus();
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /**
+         * الحصول على قيمة اللغة البرمجية
+         * @returns {string} اسم اللغة المختارة
+         */
+        function getLanguage() {
+            const language = document.getElementById('programmingLanguage').value;
+            if (language === 'Other') {
+                return document.getElementById('otherLanguage').value.trim();
+            }
+            return language;
+        }
+
+        /**
+         * الحصول على قيمة الإطار
+         * @returns {string} اسم الإطار المختار
+         */
+        function getFramework() {
+            const framework = document.getElementById('framework').value;
+            if (framework === 'Other') {
+                return document.getElementById('customFramework').value.trim();
+            }
+            return framework;
+        }
+
+        /**
+         * تعبئة سريعة مع API - ذكية حسب اللغة المختارة
+         */
+        function prefillWithApi() {
+            const language = document.getElementById('programmingLanguage').value;
+
+            // تعبئة الحقول الأساسية المشتركة
+            document.getElementById('level').value = 'متوسط';
+            document.getElementById('duration').value = 'أسبوعين';
+            document.getElementById('outputStyle').value = 'شامل';
+            document.getElementById('challengeLevel').value = 'متوسط';
+
+            // اختيار API
+            document.getElementById('dataSourceApi').checked = true;
+            document.getElementById('dataSourceLocal').checked = false;
+
+            // تعبئة حقول API المشتركة
+            document.getElementById('apiSource').value = 'https://jsonplaceholder.typicode.com';
+            document.getElementById('apiAuth').value = 'لا يوجد';
+            document.getElementById('apiEndpoints').value = 'GET /posts\nGET /posts/{id}\nGET /users\nPOST /posts';
+            document.getElementById('apiSample').value = '{ "userId": 1, "id": 1, "title": "Sample Post", "body": "Content..." }';
+            document.getElementById('apiRateLimit').value = 'غير محدود';
+            document.getElementById('apiPagination').value = 'لا يوجد';
+
+            // تخصيص حسب اللغة
+            switch(language) {
+                case 'Dart':
+                    document.getElementById('framework').value = 'Flutter';
+                    document.getElementById('projectType').value = 'تطبيق محمول';
+                    document.getElementById('database').value = 'SQLite';
+                    document.getElementById('libraries').value = 'Dio, Provider, Shared Preferences';
+                    break;
+                case 'JavaScript':
+                    document.getElementById('framework').value = 'React';
+                    document.getElementById('projectType').value = 'تطبيق ويب';
+                    document.getElementById('database').value = 'MongoDB';
+                    document.getElementById('libraries').value = 'Axios, React Router, Redux';
+                    break;
+                case 'Python':
+                    document.getElementById('framework').value = 'Flask';
+                    document.getElementById('projectType').value = 'تطبيق ويب';
+                    document.getElementById('database').value = 'PostgreSQL';
+                    document.getElementById('libraries').value = 'Requests, Flask-RESTful, SQLAlchemy';
+                    break;
+                case 'TypeScript':
+                    document.getElementById('framework').value = 'Angular';
+                    document.getElementById('projectType').value = 'تطبيق ويب';
+                    document.getElementById('database').value = 'MongoDB';
+                    document.getElementById('libraries').value = 'HttpClient, RxJS, NgRx';
+                    break;
+                case 'C#':
+                    document.getElementById('framework').value = 'ASP.NET Core';
+                    document.getElementById('projectType').value = 'تطبيق ويب';
+                    document.getElementById('database').value = 'SQL Server';
+                    document.getElementById('libraries').value = 'HttpClient, Entity Framework, AutoMapper';
+                    break;
+                case 'Java':
+                    document.getElementById('framework').value = 'Spring Boot';
+                    document.getElementById('projectType').value = 'تطبيق ويب';
+                    document.getElementById('database').value = 'MySQL';
+                    document.getElementById('libraries').value = 'Spring Web, Spring Data JPA, RestTemplate';
+                    break;
+                default:
+                    // إعدادات افتراضية للغات الأخرى
+                    document.getElementById('framework').value = 'None';
+                    document.getElementById('projectType').value = 'تطبيق ويب';
+                    document.getElementById('database').value = 'SQLite';
+                    document.getElementById('libraries').value = 'Requests, JSON';
+            }
+
+            // تحديث الواجهة
+            updateApiVisibility();
+
+            // إخفاء حقول إضافية
+            document.getElementById('otherLanguageField').style.display = 'none';
+            document.getElementById('customFrameworkField').style.display = 'none';
+
+            showAlert(`✅ تم تعبئة الحقول لسيناريو ${language} مع API بنجاح!`, 'success');
+        }
+
+        /**
+         * تعبئة سريعة بدون API - ذكية حسب اللغة المختارة
+         */
+        function prefillWithoutApi() {
+            const language = document.getElementById('programmingLanguage').value;
+
+            // تعبئة الحقول الأساسية المشتركة
+            document.getElementById('level').value = 'متوسط';
+            document.getElementById('duration').value = 'أسبوعين';
+            document.getElementById('outputStyle').value = 'شامل';
+            document.getElementById('challengeLevel').value = 'متوسط';
+
+            // اختيار بيانات محلية
+            document.getElementById('dataSourceApi').checked = false;
+            document.getElementById('dataSourceLocal').checked = true;
+
+            // تخصيص حسب اللغة
+            switch(language) {
+                case 'Dart':
+                    document.getElementById('framework').value = 'Flutter';
+                    document.getElementById('projectType').value = 'تطبيق محمول';
+                    document.getElementById('database').value = 'SQLite';
+                    document.getElementById('libraries').value = 'Provider, Sqflite, Path Provider';
+                    document.getElementById('localDataStrategy').value = 'قاعدة بيانات محلية/SQLite';
+                    document.getElementById('localJsonPath').value = 'assets/data/local_data.json';
+                    document.getElementById('localDataDetails').value = 'استخدام Sqflite لإدارة قاعدة البيانات المحلية، مع إمكانية النسخ الاحتياطي والاستعادة';
+                    break;
+                case 'JavaScript':
+                    document.getElementById('framework').value = 'React';
+                    document.getElementById('projectType').value = 'تطبيق ويب';
+                    document.getElementById('database').value = 'Local Storage';
+                    document.getElementById('libraries').value = 'React Router, Redux, Lodash';
+                    document.getElementById('localDataStrategy').value = 'تخزين محلي (LocalStorage/Hive)';
+                    document.getElementById('localJsonPath').value = 'data/localData.json';
+                    document.getElementById('localDataDetails').value = 'استخدام LocalStorage لتخزين البيانات محلياً مع إمكانية التصدير والاستيراد';
+                    break;
+                case 'Python':
+                    document.getElementById('framework').value = 'Flask';
+                    document.getElementById('projectType').value = 'تطبيق ويب';
+                    document.getElementById('database').value = 'SQLite';
+                    document.getElementById('libraries').value = 'Flask, Jinja2, SQLAlchemy';
+                    document.getElementById('localDataStrategy').value = 'قاعدة بيانات محلية/SQLite';
+                    document.getElementById('localJsonPath').value = 'data/local_data.json';
+                    document.getElementById('localDataDetails').value = 'استخدام SQLite لإدارة قاعدة البيانات المحلية مع SQLAlchemy كـ ORM';
+                    break;
+                case 'TypeScript':
+                    document.getElementById('framework').value = 'Angular';
+                    document.getElementById('projectType').value = 'تطبيق ويب';
+                    document.getElementById('database').value = 'IndexedDB';
+                    document.getElementById('libraries').value = 'RxJS, NgRx, Dexie';
+                    document.getElementById('localDataStrategy').value = 'تخزين محلي (LocalStorage/Hive)';
+                    document.getElementById('localJsonPath').value = 'assets/data/localData.json';
+                    document.getElementById('localDataDetails').value = 'استخدام IndexedDB لتخزين البيانات المعقدة محلياً';
+                    break;
+                case 'C#':
+                    document.getElementById('framework').value = 'WPF';
+                    document.getElementById('projectType').value = 'تطبيق سطح المكتب';
+                    document.getElementById('database').value = 'SQLite';
+                    document.getElementById('libraries').value = 'Entity Framework, SQLite.NET';
+                    document.getElementById('localDataStrategy').value = 'قاعدة بيانات محلية/SQLite';
+                    document.getElementById('localJsonPath').value = 'Data/local_data.json';
+                    document.getElementById('localDataDetails').value = 'استخدام SQLite مع Entity Framework لإدارة البيانات المحلية';
+                    break;
+                case 'Java':
+                    document.getElementById('framework').value = 'JavaFX';
+                    document.getElementById('projectType').value = 'تطبيق سطح المكتب';
+                    document.getElementById('database').value = 'H2 Database';
+                    document.getElementById('libraries').value = 'JDBC, H2 Database, Jackson';
+                    document.getElementById('localDataStrategy').value = 'قاعدة بيانات محلية/SQLite';
+                    document.getElementById('localJsonPath').value = 'data/local_data.json';
+                    document.getElementById('localDataDetails').value = 'استخدام H2 Database للتخزين المحلي مع JDBC';
+                    break;
+                default:
+                    // إعدادات افتراضية للغات الأخرى
+                    document.getElementById('framework').value = 'None';
+                    document.getElementById('projectType').value = 'تطبيق ويب';
+                    document.getElementById('database').value = 'SQLite';
+                    document.getElementById('libraries').value = 'JSON, File I/O';
+                    document.getElementById('localDataStrategy').value = 'ملف JSON محلي';
+                    document.getElementById('localJsonPath').value = 'data/local_data.json';
+                    document.getElementById('localDataDetails').value = 'استخدام ملفات JSON لتخزين البيانات محلياً';
+            }
+
+            // تحديث الواجهة
+            updateApiVisibility();
+
+            // إخفاء حقول إضافية
+            document.getElementById('otherLanguageField').style.display = 'none';
+            document.getElementById('customFrameworkField').style.display = 'none';
+
+            showAlert(`✅ تم تعبئة الحقول لسيناريو ${language} بدون API بنجاح!`, 'success');
+        }
+
+        /**
+         * تحديث ظهور حقول API مقابل البيانات المحلية
+         */
+        function updateApiVisibility() {
+            const apiFields = document.getElementById('apiFieldsContainer');
+            const localFields = document.getElementById('localDataContainer');
+            const isApiEnabled = document.getElementById('dataSourceApi').checked;
+
+            if (apiFields) apiFields.style.display = isApiEnabled ? 'block' : 'none';
+            if (localFields) localFields.style.display = isApiEnabled ? 'none' : 'block';
+
+            // Clear fields of the hidden section
+            if (isApiEnabled) {
+                // Clear local data fields
+                document.getElementById('localDataStrategy').value = '';
+                document.getElementById('localJsonPath').value = '';
+                document.getElementById('localDataDetails').value = '';
+            } else {
+                // Clear API fields
+                document.getElementById('apiSource').value = '';
+                document.getElementById('apiAuth').value = '';
+                document.getElementById('apiEndpoints').value = '';
+                document.getElementById('apiSample').value = '';
+                document.getElementById('apiRateLimit').value = '';
+                document.getElementById('apiPagination').value = '';
+            }
+        }
+
+        /**
+         * إرشادات خاصة بكل لغة لإدراجها في البرومبت
+         * @param {string} lang
+         * @returns {string}
+         */
+        function getLanguageGuidance(lang) {
+            switch (lang) {
+                case 'Dart':
+                    return 'أكواد نظيفة مع الالتزام بـ Sound Null Safety واتباع Effective Dart، وهيكلة واضحة للمجلدات.';
+                case 'TypeScript':
+                    return 'أكواد نظيفة مع Types دقيقة، وتهيئة صارمة لـ tsconfig، واستخدام ESLint/Prettier.';
+                case 'JavaScript':
+                    return 'أكواد نظيفة مع توثيق JSDoc وأنماط وحدات واضحة، وESLint/Prettier.';
+                case 'Python':
+                    return 'أكواد نظيفة مع Type Hints وإتباع PEP 8 وتنظيم الحزم.';
+                case 'C#':
+                    return 'أكواد نظيفة مع أنماط SOLID، وAsync/await بشكل صحيح، وتحاليل Roslyn/Analyzers.';
+                case 'Java':
+                    return 'أكواد نظيفة مع معمارية طبقية، واستخدام Lombok/Validation عند الحاجة.';
+                default:
+                    return 'أكواد نظيفة وفق أفضل ممارسات اللغة المختارة ومعايير الأسلوب.';
+            }
+        }
+
+        /**
+         * مواءمة إضافية بحسب مستوى الطلاب
+         * @param {string} level
+         * @returns {string}
+         */
+        function getLevelAdjustments(level) {
+            switch (level) {
+                case 'مبتدئ':
+                    return `- ركز على المفاهيم الأساسية أولاً قبل التوسع.
+- اجعل الاختبارات والنشر خطوات اختيارية.
+- وفر تلميحات كثيرة وحلولاً جزئية.`;
+                case 'متوسط':
+                    return `- أضف اختبارات وحدات أساسية.
+- تغطية مبادئ الأداء والتعامل مع الأخطاء.
+- واجبات منزلية قصيرة لتعزيز المفاهيم.`;
+                case 'متقدم':
+                case 'خبير':
+                    return `- أضف CI/CD وخطافات مراجعة الكود.
+- اعتبارات أمنية متقدمة (OWASP) وتحسين الأداء.
+- مهام تحدي مع بنشمارك للأداء.`;
+                default:
+                    return '';
+            }
+        }
+
+        /**
+         * تجميع تحذيرات استباقية غير معطلة للمستخدم
+         * @param {Object} data
+         * @returns {string[]}
+         */
+        function collectWarnings(data) {
+            const warnings = [];
+
+            // مدة قصيرة لمشروع محمول كبير
+            if (data.projectType.includes('محمول') && /ساعة/.test(data.duration) && !/يوم|أيام/.test(data.duration)) {
+                warnings.push('قد تكون المدة قصيرة لبناء تطبيق محمول متكامل، فكر بزيادة الوقت أو تقليل النطاق.');
+            }
+
+            // ذكر شبكات/HTTP بدون تحديد API
+            if (data.apiEnabled && ((/\bhttp\b|\bdio\b|axios|fetch/i.test(data.libraries) || /API/i.test(data.goal)) && !data.apiSource)) {
+                warnings.push('تم ذكر استهلاك API دون تحديد مصدر الـ API. أضف رابطاً أو تفاصيل أو استخدم API عامة مثل Fake Store.');
+            }
+
+            // مشروع Flutter/JavaScript/Python دون إدارة حالة مناسبة
+            if ((/Flutter/i.test(data.framework) || /Dart/i.test(data.language)) && !/(riverpod|provider|getx)/i.test(data.libraries)) {
+                warnings.push('مشروع Flutter قد يستفيد من حزمة لإدارة الحالة (Riverpod/Provider/GetX).');
+            }
+            if ((/React|Vue|Angular/i.test(data.framework) || /JavaScript/i.test(data.language)) && !/(redux|vuex|ngrx|zustand)/i.test(data.libraries)) {
+                warnings.push('مشروع JavaScript/React قد يستفيد من مكتبة لإدارة الحالة (Redux/Vuex/NgRx/Zustand).');
+            }
+            if ((/Flask|Django/i.test(data.framework) || /Python/i.test(data.language)) && !/(flask-sqlalchemy|django-orm)/i.test(data.libraries)) {
+                warnings.push('مشروع Python/Flask قد يستفيد من ORM لإدارة قاعدة البيانات (SQLAlchemy/Django ORM).');
+            }
+
+            // بدون API لكن لم تُحدد استراتيجية بيانات محلية
+            if (!data.apiEnabled && !data.localDataStrategy && !data.localDataDetails) {
+                warnings.push('تم اختيار "بيانات محلية" دون تحديد استراتيجية البيانات. يُفضّل اختيار إحدى الاستراتيجيات المتاحة أو وصف كيفية توفير البيانات.');
+            }
+
+            return warnings;
+        }
+
+        // أدوات مساعدة لتنظيف/التحقق
+        function sanitizeCompact(str, maxLen = 160) {
+            if (!str) return '';
+            return str.replace(/[\r\n]+/g, ' ').replace(/\s{2,}/g, ' ').trim().slice(0, maxLen);
+        }
+
+        function normalizeJsonSample(str) {
+            if (!str) return '';
+            let t = str.trim();
+            if (/^```/m.test(t)) {
+                t = t.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '');
+            }
+            return t.trim();
+        }
+
+        function isValidJsonString(str) {
+            if (!str) return false;
+            try { JSON.parse(str); return true; } catch (_) { return false; }
+        }
+
+        // ========== دالة إنشاء البرومبت المتقدم ==========
+
+        /**
+         * إنشاء البرومبت الكامل والمتقدم
+         */
+        function generatePrompt() {
+            // التحقق من صحة النموذج
+            if (!validateForm()) return;
+
+            // عرض شريط التقدم
+            toggleElement(document.getElementById('progressIndicator'), true);
+
+            // جمع البيانات من النموذج
+            const data = {
+                language: getLanguage(),
+                topic: document.getElementById('topic').value.trim(),
+                goal: document.getElementById('goal').value.trim(),
+                level: document.getElementById('level').value.trim(),
+                duration: document.getElementById('duration').value.trim() || 'غير محدد',
+                projectType: document.getElementById('projectType').value,
+                framework: getFramework(),
+                database: document.getElementById('database').value,
+                tools: document.getElementById('tools').value.trim() || 'أي محرر نصوص حديث',
+                libraries: document.getElementById('libraries').value.trim() || 'لا توجد مكتبات محددة',
+                outputStyle: document.getElementById('outputStyle').value,
+                challengeLevel: document.getElementById('challengeLevel').value,
+                prerequisites: document.getElementById('prerequisites').value.trim() || 'معرفة أساسية بالبرمجة',
+                notes: document.getElementById('notes').value.trim() || 'لا توجد ملاحظات إضافية',
+                apiEnabled: document.getElementById('dataSourceApi').checked,
+                apiSource: document.getElementById('apiSource')?.value.trim() || '',
+                apiEndpoints: document.getElementById('apiEndpoints')?.value.trim() || '',
+                apiSample: document.getElementById('apiSample')?.value.trim() || '',
+                apiAuth: document.getElementById('apiAuth')?.value.trim() || '',
+                apiRateLimit: document.getElementById('apiRateLimit')?.value.trim() || '',
+                apiPagination: document.getElementById('apiPagination')?.value.trim() || '',
+                localDataStrategy: document.getElementById('localDataStrategy')?.value || '',
+                localJsonPath: document.getElementById('localJsonPath')?.value.trim() || '',
+                localDataDetails: document.getElementById('localDataDetails')?.value.trim() || ''
+            };
+
+            // كشف ذكي للوضع - إذا كان API فارغاً ولكن البيانات المحلية مملوءة، اقترح التبديل
+            if (data.apiEnabled && !data.apiSource && (data.localDataStrategy || data.localDataDetails)) {
+                showAlert('💡 تم اكتشاف أن حقول API فارغة ولكن تم تعبئة بيانات محلية. تم التبديل تلقائياً إلى وضع "بيانات محلية".', 'info');
+                document.getElementById('dataSourceApi').checked = false;
+                document.getElementById('dataSourceLocal').checked = true;
+                updateApiVisibility();
+                data.apiEnabled = false;
+            }
+
+            // تحذيرات استباقية غير معطّلة
+            const warnings = collectWarnings(data);
+            if (warnings.length) {
+                showAlert(`⚠️ ملاحظات تحسين: ${warnings.join(' • ')}`, 'info');
+            }
+
+            // بناء البرومبت المتقدم
+            let prompt = generateAdvancedPrompt(data);
+
+            // حفظ البرومبت
+            currentPrompt = prompt;
+
+            // عرض النتيجة بعد تأخير قصير للمظهر
+            setTimeout(() => {
+                displayOutput(prompt);
+                toggleElement(document.getElementById('progressIndicator'), false);
+                showAlert('✅ تم إنشاء البرومبت المتقدم بنجاح!', 'success');
+
+                // إظهار الأزرار الإضافية
+                document.getElementById('previewBtn').style.display = 'inline-block';
+                document.getElementById('copyBtn').style.display = 'inline-block';
+                document.getElementById('downloadBtn').style.display = 'inline-block';
+                document.getElementById('downloadHtmlBtn').style.display = 'inline-block';
+            }, 1500);
+        }
+
+        /**
+         * توليد البرومبت المتقدم بناءً على البيانات
+         * @param {Object} data - بيانات النموذج
+         * @returns {string} البرومبت الكامل
+         */
+        function generateAdvancedPrompt(data) {
+            let prompt = `# 🚀 طلب إنشاء لاب تعليمي برمجي متقدم
+
+## 📋 معلومات اللاب التفصيلية
+
+أريد منك إنشاء لاب تعليمي شامل ومتطور بالمواصفات التالية:
+
+### 🎯 بيانات المشروع الأساسية:
+- **اللغة البرمجية:** ${data.language}
+- **المستوى التعليمي:** ${data.level}
+- **نوع المشروع:** ${data.projectType}
+- **عنوان اللاب:** ${data.topic}
+- **الهدف التعليمي الرئيسي:** ${data.goal}
+- **المدة المتوقعة:** ${data.duration}
+
+### 💻 المتطلبات التقنية المتقدمة:
+- **الإطار/المنصة الأساسية:** ${data.framework}
+- **قاعدة البيانات:** ${data.database}
+- **أدوات التطوير:** ${data.tools}
+- **المكتبات والحزم:** ${data.libraries}
+
+### 📚 المتطلبات التعليمية:
+- **المتطلبات المسبقة:** ${data.prerequisites}
+- **مستوى التحدي:** ${data.challengeLevel}
+- **نمط المخرجات:** ${data.outputStyle}
+
+### 📝 ملاحظات إضافية:
+${data.notes}
+
+---
+
+## 🏗️ متطلبات البرومبت والمخرجات المتقدمة:
+
+### 1. هيكل اللاب المتطور:
+يجب أن يحتوي اللاب على:
+- **مقدمة تفاعلية:** شرح الهدف مع أسئلة استكشافية للطلاب
+- **خطوات مُرقمة ومنظمة:** تقسيم المشروع إلى مراحل منطقية مع checkpoints
+- **أكواد برمجية متقدمة:** ${getLanguageGuidance(data.language)}
+- **تمارين تدريجية:** من البسيط للمعقد مع حلول وتلميحات
+- **تحديات إبداعية:** مشاريع إضافية للطلاب المتحمسين
+- **استكشاف الأخطاء المتقدم:** debugging strategies و best practices
+- **اختبارات و validation:** unit tests و integration tests
+- **نشر و deployment:** كيفية نشر المشروع
+- **ملخص مع شهادة:** تقييم التعلم وإصدار شهادة إنجاز
+
+### 2. معايير الجودة المتقدمة:
+- ✅ **الكود:** نظيف، قابل للصيانة، مع comments عربية شاملة
+- ✅ **الأمان:** input validation، XSS protection، secure coding
+- ✅ **الأداء:** optimization، caching، efficient algorithms
+- ✅ **تجربة المستخدم:** responsive design، accessibility، UX best practices
+- ✅ **الاختبار:** comprehensive testing strategy
+- ✅ **التوثيق:** README، API docs، code documentation
+- ✅ **Git workflow:** branching strategy، commit messages، PR reviews
+
+### 3. تخصيص نمط المخرجات:
+`;
+
+            // إضافة التعليمات بناءً على نمط المخرجات
+            switch(data.outputStyle) {
+                case 'شامل':
+                    prompt += `
+- قدم شرحاً مفصلاً لكل خطوة مع أمثلة متعددة
+- أضف تمارين إضافية ومشاريع جانبية
+- قدم نصائح و strategies للتعلم الفعال
+- ضمّن روابط وموارد إضافية للتعمق
+- أضف أسئلة مناقشة و critical thinking exercises
+`;
+                    break;
+                case 'مختصر':
+                    prompt += `
+- ركز على المفاهيم الأساسية فقط
+- قدم أكواداً موجزة وفعالة
+- تمارين عملية قليلة لكن مؤثرة
+- تجنب التفاصيل الإضافية غير الضرورية
+- ركز على النتائج والمخرجات النهائية
+`;
+                    break;
+                case 'تفصيلي':
+                    prompt += `
+- شرح مفصل جداً مع code walkthroughs
+- أكواد مع شرح سطر بسطر عند الحاجة
+- تمارين كثيرة مع حلول مفصلة ومُعلقة
+- نصائح متقدمة وحيل professional development
+- أضف performance benchmarks و optimization tips
+`;
+                    break;
+                case 'متوازن':
+                    prompt += `
+- توازن بين التفصيل والاختصار
+- ركز على المهارات الأساسية والمتقدمة بالتساوي
+- قدم أمثلة متنوعة مع شرح معقول
+- أضف تمارين متنوعة الصعوبة
+- ضمن documentation جيدة و testing مناسب
+`;
+                    break;
+            }
+
+            // إضافات حسب المستوى
+            const levelExtra = getLevelAdjustments(data.level);
+
+            // قسم API أو بيانات محلية حسب الحالة مع إخفاء الفراغ والتحقق من JSON
+            const src = (data.apiSource || '').trim();
+            const auth = sanitizeCompact(data.apiAuth, 120);
+            const rate = sanitizeCompact(data.apiRateLimit, 80);
+            const pag  = sanitizeCompact(data.apiPagination, 120);
+            const endpoints = (data.apiEndpoints || '').trim();
+            const jsonRaw = normalizeJsonSample(data.apiSample || '');
+            const jsonOk = isValidJsonString(jsonRaw);
+            const hasAnyApiField = Boolean(src || auth || rate || pag || endpoints || jsonRaw);
+
+            if (data.apiEnabled && hasAnyApiField) {
+                prompt += `
+
+### 🔌 مصادر البيانات والتكامل (API)
+`;
+                if (src)  prompt += `- مصدر الـ API: ${src}\n`;
+                if (auth) prompt += `- المصادقة: ${auth}\n`;
+                if (rate) prompt += `- حدود المعدل: ${rate}\n`;
+                if (pag)  prompt += `- أسلوب التصفح (Pagination): ${pag}\n`;
+                if (endpoints) {
+                    prompt += `\n- نقاط النهاية الرئيسية:\n${endpoints}\n`;
+                }
+                if (jsonOk) {
+                    prompt += `\n- مثال بنية JSON:\n\`\`\`json\n${jsonRaw}\n\`\`\`\n`;
+                } else if (jsonRaw) {
+                    showAlert('⚠️ عينة JSON للـ API لا تبدو صالحة، سيتم تجاهلها.', 'info');
+                }
+            } else if (!data.apiEnabled) {
+                prompt += `
+
+### 📦 مصادر البيانات المحلية (بدون API)
+${data.localDataStrategy ? `- الاستراتيجية: ${data.localDataStrategy}\n` : ''}
+${data.localJsonPath ? `- مسار الملف المحلي: ${data.localJsonPath}\n` : ''}
+${data.localDataDetails ? `\n- تفاصيل إضافية:\n${data.localDataDetails}\n` : ''}
+
+**إرشادات تنفيذ البيانات المحلية:**
+- استخدم بيانات ثابتة في الكود أو ملفات JSON محلية ضمن مجلد الأصول
+- نفّذ طبقة قراءة بيانات محلية مع إمكانية التبديل لاحقاً إلى API
+- أضف اختبارات شاملة تغطي العمل بدون اتصال بالشبكة
+- ضمن أن البيانات المحلية تكون كافية لأغراض التعلم والاختبار
+- فكر في إضافة أداة إدارة بيانات محلية للتحديث والتعديل
+- أضف آليات للتعامل مع حالات عدم وجود البيانات أو تلفها
+`;
+            }
+
+            if (levelExtra) {
+                prompt += `
+
+### 🎓 مواءمة حسب المستوى
+${levelExtra}
+`;
+            }
+
+            prompt += `
+
+### 🧩 تعليمات الإخراج النهائي (ملف HTML واحد)
+- أخرج الناتج النهائي كصفحة HTML واحدة فقط بدون أي شرح إضافي.
+- ابدأ بـ <!DOCTYPE html> واستخدم <html lang="ar" dir="rtl">.
+- أضف <meta charset="utf-8">، واستخدم Bootstrap 5 عبر CDN، وخط Noto Sans Arabic.
+- قسّم الصفحة إلى: مقدمة، خطوات، تمارين، اختبارات، نشر، خاتمة.
+- أضف تعليقات عربية داخل الكود لتوضيح الأقسام عند الحاجة.
+- لا تُرجِع أي نص خارج كود HTML.
+
+### 4. التعليمات الخاصة باللاب:
+- ابدأ بـ overview جذاب يثير حماس الطلاب
+- استخدم أمثلة واقعية من الصناعة
+- شجع على التفكير النقدي والإبداع
+- أضف reflection points بعد كل مرحلة كبيرة
+- قدم mentorship tips للطلاب الجدد
+- أضف career advice و job market insights
+- ضمن أن اللاب يبني portfolio piece قوي
+
+---
+
+## ✅ ملخص المتطلبات النهائي:
+
+| المعيار | التفصيل |
+|---------|---------|
+| اللغة | ${data.language} |
+| المستوى | ${data.level} |
+| النوع | ${data.projectType} |
+| العنوان | ${data.topic} |
+| المدة | ${data.duration} |
+| الإطار | ${data.framework} |
+| نمط المخرجات | ${data.outputStyle} |
+| مستوى التحدي | ${data.challengeLevel} |
+
+---
+
+## 🎯 خطوات الإنشاء المطلوبة:
+
+1. **التخطيط الاستراتيجي:** فهم المتطلبات وتصميم architecture المشروع
+2. **إعداد البيئة:** setup instructions مفصلة مع troubleshooting
+3. **التطوير التدريجي:** خطوات مُرقمة مع commits منظمة
+4. **الاختبار الشامل:** testing strategy و quality assurance
+5. **النشر والعرض:** deployment و portfolio presentation
+6. **التوثيق النهائي:** documentation كاملة و README احترافي
+7. **التقييم:** self-assessment و peer review guidelines
+
+---
+
+## 🚀 البدء في إنشاء اللاب المتقدم!
+
+**أنت الآن جاهز لإنشاء لاب تعليمي استثنائي سيغير حياة الطلاب ويطور مهاراتهم بشكل كبير.**
+
+**ابدأ بالرد على هذا الطلب بخطة مفصلة للاب، ثم انتقل للتنفيذ التدريجي.**
+
+**اللاب يجب أن يكون جاهز للاستخدام الفوري ويحتوي على كل ما يحتاجه الطالب للنجاح!**
+`;
+
+            return prompt;
+        }
+
+        // ========== دوال عرض المخرجات ==========
+
+        /**
+         * عرض النتيجة النهائية
+         * @param {string} text - النص المراد عرضه
+         */
+        function displayOutput(text) {
+            const outputSection = document.getElementById('outputSection');
+            const promptOutput = document.getElementById('promptOutput');
+            const outputInfo = document.getElementById('outputInfo');
+
+            promptOutput.value = text;
+            outputInfo.innerHTML = `
+                <span><i class="fas fa-clock"></i> تم الإنشاء: ${new Date().toLocaleString('ar-SA')}</span>
+                <span><i class="fas fa-file-alt"></i> الأحرف: ${text.length.toLocaleString('ar-SA')}</span>
+                <span><i class="fas fa-list"></i> الكلمات: ${text.split(/\s+/).length.toLocaleString('ar-SA')}</span>
+            `;
+
+            toggleElement(outputSection, true);
+
+            // التمرير إلى المخرجات
+            setTimeout(() => {
+                outputSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+        }
+
+        // ========== دالة المعاينة السريعة ==========
+
+        /**
+         * إنشاء معاينة سريعة للبرومبت
+         */
+        function generatePreview() {
+            if (!currentPrompt) {
+                showAlert('❌ لا يوجد برومبت للمعاينة', 'error');
+                return;
+            }
+
+            // إنشاء معاينة مختصرة
+            const lines = currentPrompt.split('\n');
+            const previewLines = lines.slice(0, 25);
+            const preview = previewLines.join('\n') + '\n\n... [تم اختصار المحتوى] ...\n\n💡 استخدم "إنشاء البرومبت المتقدم" لرؤية النسخة الكاملة';
+
+            showAlert('✅ تم عرض المعاينة السريعة', 'success');
+            console.log('المعاينة السريعة:', preview);
+        }
+
+        // ========== دالة النسخ إلى الحافظة ==========
+
+        /**
+         * نسخ البرومبت إلى الحافظة
+         */
+        function copyToClipboard() {
+            if (!currentPrompt) {
+                showAlert('❌ لا يوجد برومبت للنسخ', 'error');
+                return;
+            }
+
+            const promptOutput = document.getElementById('promptOutput');
+
+            // استخدام Clipboard API الحديثة
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(promptOutput.value).then(() => {
+                    showAlert('✅ تم نسخ البرومبت إلى الحافظة بنجاح!', 'success');
+                }).catch(() => {
+                    // البديل القديم
+                    fallbackCopy(promptOutput);
+                });
+            } else {
+                // البديل القديم للمتصفحات القديمة
+                fallbackCopy(promptOutput);
+            }
+        }
+
+        /**
+         * دالة النسخ البديلة
+         * @param {HTMLElement} element - العنصر المراد نسخه
+         */
+        function fallbackCopy(element) {
+            element.select();
+            try {
+                document.execCommand('copy');
+                showAlert('✅ تم نسخ البرومبت إلى الحافظة بنجاح!', 'success');
+            } catch (err) {
+                showAlert('❌ فشل النسخ. حاول يدوياً باستخدام Ctrl+C', 'error');
+            }
+        }
+
+        // ========== دالة تنزيل الملف ==========
+
+        /**
+         * تنزيل البرومبت كملف نصي
+         */
+        function downloadPrompt() {
+            if (!currentPrompt) {
+                showAlert('❌ لا يوجد برومبت للتنزيل', 'error');
+                return;
+            }
+
+            const promptOutput = document.getElementById('promptOutput');
+
+            // إنشاء كائن Blob
+            const blob = new Blob([promptOutput.value], { type: 'text/plain; charset=utf-8' });
+
+            // إنشاء رابط التنزيل
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+
+            link.setAttribute('href', url);
+            link.setAttribute('download', `lab_prompt_${Date.now()}.txt`);
+            link.style.visibility = 'hidden';
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // تنظيف الذاكرة
+            URL.revokeObjectURL(url);
+
+            showAlert('✅ تم تنزيل البرومبت بنجاح!', 'success');
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>"']/g, function(m) {
+                switch (m) {
+                    case '&': return '&amp;';
+                    case '<': return '&lt;';
+                    case '>': return '&gt;';
+                    case '"': return '&quot;';
+                    case "'": return '&#39;';
+                    default: return m;
+                }
+            });
+        }
+
+        function downloadHTML() {
+            if (!currentPrompt) {
+                showAlert('❌ لا يوجد برومبت للتنزيل', 'error');
+                return;
+            }
+
+            const content = `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab Prompt</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Noto Sans Arabic', sans-serif; padding: 2rem; background: #f8fafc; color: #1e293b; }
+    pre { white-space: pre-wrap; word-wrap: break-word; background: #fff; border: 1px solid #e2e8f0; padding: 1rem; border-radius: 8px; }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta name="description" content="نص البرومبت الذي تم توليده من المولد المتقدم" />
+  <meta name="robots" content="noindex" />
+  </head>
+<body>
+  <div class="container">
+    <h1 class="mb-4"><i class="fas fa-file-alt"></i> البرومبت المولد</h1>
+    <pre>${escapeHTML(currentPrompt)}</pre>
+  </div>
+</body>
+</html>`;
+
+            const blob = new Blob([content], { type: 'text/html; charset=utf-8' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `lab_prompt_${Date.now()}.html`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            showAlert('✅ تم تنزيل ملف HTML بنجاح!', 'success');
+        }
+
+        // ========== دالة إعادة تعيين النموذج ==========
+
+        /**
+         * إعادة تعيين جميع الحقول والحالة
+         */
+        function resetForm() {
+            document.getElementById('labForm').reset();
+            toggleElement(document.getElementById('outputSection'), false);
+            toggleElement(document.getElementById('alertBox'), false);
+            document.getElementById('otherLanguageField').style.display = 'none';
+            document.getElementById('customFrameworkField').style.display = 'none';
+
+            // إخفاء الأزرار الإضافية
+            document.getElementById('previewBtn').style.display = 'none';
+            document.getElementById('copyBtn').style.display = 'none';
+            document.getElementById('downloadBtn').style.display = 'none';
+            document.getElementById('downloadHtmlBtn').style.display = 'none';
+
+            currentPrompt = '';
+            showAlert('✅ تم إعادة تعيين النموذج بنجاح', 'success');
+
+            // إعادة حالة الظهور الافتراضية لحقول البيانات (API enabled by default)
+            document.getElementById('dataSourceApi').checked = true;
+            document.getElementById('dataSourceLocal').checked = false;
+            updateApiVisibility();
+        }
+
+        // ========== معالجات الأحداث ==========
+
+        /**
+         * معالج الإرسال (منع الإرسال الافتراضي)
+         */
+        document.getElementById('labForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            generatePrompt();
+        });
+
+        /**
+         * معالج الإدخال (Enter للإرسال)
+         */
+        document.getElementById('labForm').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                generatePrompt();
+            }
+        });
+
+        // ========== تهيئة الصفحة ==========
+
+        /**
+         * تهيئة الصفحة عند التحميل
+         */
+        window.addEventListener('load', function() {
+            console.log('✅ تم تحميل مولد البرومبتات المتقدم بنجاح - النسخة 2.0');
+            console.log('🔧 جاهز لإنشاء برومبتات لابات تعليمية احترافية');
+
+            // تهيئة ظهور حقول البيانات
+            updateApiVisibility();
+
+            // إضافة keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Ctrl+Enter لإنشاء البرومبت
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    generatePrompt();
+                }
+                // Ctrl+R لإعادة التعيين
+                if (e.ctrlKey && e.key === 'r') {
+                    e.preventDefault();
+                    resetForm();
+                }
+            });
+        });
+
+        // ========== دوال إضافية للتحسين ==========
+
+        /**
+         * تحديث معلومات المخرجات في الوقت الفعلي
+         */
+        document.getElementById('promptOutput').addEventListener('input', function() {
+            const text = this.value;
+            const outputInfo = document.getElementById('outputInfo');
+            outputInfo.innerHTML = `
+                <span><i class="fas fa-clock"></i> تم التعديل: ${new Date().toLocaleString('ar-SA')}</span>
+                <span><i class="fas fa-file-alt"></i> الأحرف: ${text.length.toLocaleString('ar-SA')}</span>
+                <span><i class="fas fa-list"></i> الكلمات: ${text.split(/\s+/).length.toLocaleString('ar-SA')}</span>
+            `;
+        });
+    </script>
+</body>
+</html>
